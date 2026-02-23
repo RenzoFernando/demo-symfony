@@ -1,5 +1,5 @@
 # demo-symfony
-MiniInventory API es un demo backend en Symfony que simula un sistema de inventario/catálogo: expone una API REST para consultar y administrar productos. En la Parte 3 se agrega seguridad (JWT + roles) y en la Parte 2 se conecta a MongoDB.
+MiniInventory API es un demo backend en Symfony que simula un sistema de inventario/catálogo: expone una API REST para consultar y administrar productos.
 
 ---
 
