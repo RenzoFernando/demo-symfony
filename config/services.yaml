@@ -19,5 +19,15 @@ services:
     App\:
         resource: '../src/'
 
+    # 1) MongoDB\Client como servicio
+    MongoDB\Client:
+        arguments:
+            - '%env(MONGODB_URL)%'
+
+    # 2) ProductRepository: pasar explícitamente el $dbName
+    App\Repository\ProductRepository:
+        arguments:
+            $dbName: '%env(MONGODB_DB)%'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -8,6 +8,8 @@ services:
       - ./:/var/www/html
     environment:
       APP_ENV: dev
+      MONGODB_URL: mongodb://mongo:27017
+      MONGODB_DB: miniinventory
     depends_on:
       - mongo
 
