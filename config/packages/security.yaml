@@ -1,0 +1,52 @@
+security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        # Aquí configuramos a Symfony para que busque en MongoDB a través del UserProvider (App\Security\UserProvider)
+        app_user_provider:
+            id: App\Security\UserProvider
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            
+        login:
+            pattern: ^/api/login
+            stateless: true
+            provider: app_user_provider
+            json_login:
+                # El endpoint al que le hacemos POST para recibir el token
+                check_path: /api/login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern:   ^/api
+            stateless: true
+            provider: app_user_provider
+            jwt: ~  # Usar lexik para verificar que los JWT existen en las request a /api
+
+    access_control:
+        # Permitir acceder a la creación del token de forma pública
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        
+        # Bloquear escrituras en api/products: Sólo Admin
+        - { path: ^/api/products, roles: ROLE_ADMIN, methods: [POST, PUT, DELETE, PATCH] }
+        
+        # Permitir lecturas a todo el que tenga token de Usuario o Admin:
+        - { path: ^/api/products, roles: IS_AUTHENTICATED_FULLY, methods: [GET] }
+
+when@test:
+    security:
+        password_hashers:
+            # Password hashers are resource-intensive by design to ensure security.
+            # In tests, it's safe to reduce their cost to improve performance.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon

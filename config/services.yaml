@@ -29,5 +29,9 @@ services:
         arguments:
             $dbName: '%env(MONGODB_DB)%'
 
+    App\Repository\UserRepository:
+        arguments:
+            $dbName: '%env(MONGODB_DB)%'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

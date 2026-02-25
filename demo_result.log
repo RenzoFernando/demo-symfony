@@ -1,0 +1,22 @@
+=== INICIANDO DEMO JWT ===
+
+1. GET /api/products sin token...
+   -> Codigo HTTP: 401
+
+2. POST /api/login (Obtener Token de ROLE_USER)...
+   -> Codigo HTTP: 200
+   -> Respuesta: {"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NzE5NjMzMzEsImV4cCI6MTc3MTk2NjkzMSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlckB0ZXN0LmNvbSJ9.bC_wk1sFz90L8ee5JHlY0T8d2kakvksHooivuasVhPZDm89N7eNCbg6NpUL1BX_0y0HoQc4-9KEcn2xY8MgRCPJ8FAIgNxc6MGfOkZK7fIkz7_tZv5bSO_Z8WNJpZYUN6_E9adxjGxq_LFT2h2S4G_tU2t2urG6SAaK0t-Gwejv_MWR27mfVTwPFolppbJNzCE1kXGHyvqn96vEw_f6U4M2jka3tG7PS3ZxB3y8zKxmlfqDd8U0vpJhBHvxUMwdVv805Ho8oapWcXNI9-ah_KYVNY3Ccxgu7-WcdjMq0hRqHVUDa7NB1rou4UaQk3RRCfTFqqWwJBBAJ9fKyYExD5g"}
+
+3. GET /api/products con token ROLE_USER...
+   -> Codigo HTTP: 200
+
+4. POST /api/products con token ROLE_USER...
+   -> Codigo HTTP: 403
+
+5. POST /api/login (Obtener Token de ROLE_ADMIN)...
+   -> Codigo HTTP: 200
+
+6. POST /api/products con token ROLE_ADMIN...
+   -> Codigo HTTP: 201
+
+=== FIN EXITOSO ===
