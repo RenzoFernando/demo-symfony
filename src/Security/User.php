@@ -52,8 +52,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function eraseCredentials(): void
-    {
-        // Si tienes código en texto plano aquí, debes borrarlo, pero en este caso no.
-    }
+
 }
